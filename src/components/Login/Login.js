@@ -15,7 +15,7 @@ const {signInWithGoogle} = useFirebase()
       <form className="form-input">
         <input type="email" placeholder="Enter Your Email" />
         <input type="password" placeholder="Enter Your Password" />
-        <button type="submit">Register</button>
+        <button type="submit">Login</button>
       </form>
     </>
   );
