@@ -4,18 +4,30 @@ import "./Login.css";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
 import app from "../../firebase.init";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const auth = getAuth(app);
 
 const Login = () => {
   // const {signInWithGoogle} = useFirebase()
   const [signInWithGoogle] = useSignInWithGoogle(auth);
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const from = location?.state?.from?.pathname || '/';
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+    .then(()=>{
+      navigate(from, {replace: true})
+    })
+  };
 
   return (
     <>
       <div className="login-heading">
         <h2>Pleaser login</h2>
-        <button className="google-login" onClick={() => signInWithGoogle()}>
+        <button className="google-login" onClick={handleGoogleSignIn}>
           Google Sign In
         </button>
       </div>
